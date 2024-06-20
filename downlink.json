@@ -1,0 +1,16 @@
+[
+    {
+       "name": "Set interval delay",
+       "port": "1",
+       "data": "010001A4",
+       "confirmed": false
+   },
+
+   {
+       "name": "Set device rejoining delay",
+       "port": "1",
+       "data": "32010B4010E0",
+       "confirmed": false
+   }
+
+]
