@@ -414,9 +414,6 @@ if __name__ == "__main__":
     # This must point to the API interface.
     # server = credentials.CHIRPSTACK_SERVER
 
-    # The API token (retrieved using the web-interface).
-    api_token = credentials.CHIRPSTACK_TOKEN
-
     logging.basicConfig(level=logging.DEBUG)
     args = vars(getArgs().parse_args())
     logging.debug("args : {}".format(args))

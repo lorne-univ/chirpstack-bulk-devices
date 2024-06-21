@@ -164,6 +164,3 @@ cython_debug/
 # But do not ignore example.csv
 !example.csv
 .vscode/
-credentials.py
-dev_import_Chambard.py
-add_device.py
