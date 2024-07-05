@@ -5,7 +5,6 @@ import json
 import os
 import logging
 import argparse
-import credentials
 
 import grpc
 from chirpstack_api import api
@@ -305,7 +304,7 @@ def send_downlink(client, device_file_path, downlink_file_path):
 
                     # Construct the request
                     req = api.EnqueueDeviceQueueItemRequest()
-                    req.queue_item.confirmed = downlink_confirmed  # Définir selon votre logique métier
+                    req.queue_item.confirmed = downlink_confirmed
                     req.queue_item.data = bytes.fromhex(downlink_content)
                     req.queue_item.f_port = downlink_port
                     req.queue_item.dev_eui = device_info['DEV_EUI']
@@ -405,14 +404,6 @@ def getArgs(argv=None):
 
 
 if __name__ == "__main__":
-    # device_list_file_path = r"C:\Users\admin\OneDrive - Dorian\OneDrive - Université Savoie Mont Blanc\2024 - Stage Dorian\11_Provisioning-device\devices_file.csv"  # Full file name
-    # tenant_name = "ChirpStack"  # Tenant name
-    # application_name = "Patrimoine"  # Application name
-    # device_profile_name = "patrimoine_profile"  # Device_profile name
-    # downlink_content = "AA"
-    # downlink_file_path = r"C:\Users\admin\OneDrive - Dorian\OneDrive - Université Savoie Mont Blanc\2024 - Stage Dorian\11_Provisioning-device\downlink.json"
-    # This must point to the API interface.
-    # server = credentials.CHIRPSTACK_SERVER
 
     logging.basicConfig(level=logging.DEBUG)
     args = vars(getArgs().parse_args())
@@ -432,20 +423,17 @@ if __name__ == "__main__":
     # Define the API key meta-data.
     auth_token = [("authorization", "Bearer %s" % api_token)]
 
-    ##### Partie check_file
+    ##### Check_file
     check_device_file(device_list_file_path)
 
-    ##### Partie récupération_ID
-    # test_get_tenant_id(channel,tenant_name)
+    ##### Get_ID
     tenant_id = get_tenant_id(channel, tenant_name)
 
-    # test_get_application_id(channel,application_name,tenant_id)
     application_id = get_application_id(channel, application_name, tenant_id)
 
-    # test_get_profile_id(channel,device_profile_name,tenant_id)
     profile_id = get_profile_id(channel, device_profile_name, tenant_id)
 
-
+    ##### Action
     if action == "remove":
         delete_devices(channel, device_list_file_path)
 
